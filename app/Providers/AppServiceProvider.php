@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (app()->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         Gate::define('kelola-buku', function ($user) {
             return $user->hasAnyRole(['Admin', 'Petugas']);
         });
@@ -29,5 +33,3 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Peminjaman::class, PeminjamanPolicy::class);
     }
 }
-
-
