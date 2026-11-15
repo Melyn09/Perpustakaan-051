@@ -1,3 +1,9 @@
 <?php
 
-require _DIR_ . '/../public/index.php';
+define('LARAVEL_START', microtime(true));
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+$app->handleRequest(Illuminate\Http\Request::capture());
